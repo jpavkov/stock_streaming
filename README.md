@@ -1,9 +1,10 @@
-# stock_streaming 
+# Project Structure: Stock Streaming
 
 ## Overview
 The goal of this project is to ingest stock data using a Yahoo! api, process the data and manipulate it with python, storing it in Snowflake. AWS will be used to deploy Docker containers to a Kubernetes cluster. Upon completion, the data will be available for phase 2, which will be to perform modeling on stock prices over time with time-series analysis.
 
 ## Architecture
+
 /stock_streaming/
 │
 ├── .github/                # GitHub-related files (actions, workflows, etc.)
