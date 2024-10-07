@@ -17,4 +17,5 @@ EXPOSE 5000
 ENV PYTHONUNBUFFERED=1
 
 # Run the application
+# user .env file for environment variables
 CMD ["python", "src/main.py"]
