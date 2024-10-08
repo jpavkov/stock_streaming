@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                // Pull the latest code from GitHub
                 git url: 'https://github.com/jpavkov/stock_streaming.git', branch: 'main'
             }
         }
@@ -22,7 +21,6 @@ pipeline {
 
         stage('Run Application') {
             steps {
-                // Run your application script
                 sh 'source venv/bin/activate && python src/main.py'
             }
         }
@@ -36,18 +34,18 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                // Load environment variables from .env file
-                sh 'set -o allexport; source .env; set +o allexport'
-
-                // Log in to Docker Hub
-                sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+                // Load environment variables from the .env file
+                dotenv {
+                    sh 'echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin'
+                }
 
                 // Push the Docker image to Docker Hub
                 sh 'docker push jpavkov/stock_streaming:latest'
 
-                // Optional: Run the Docker container (if applicable)
+                // Run the Docker container
                 // sh 'docker run -d -p 8080:8080 jpavkov/stock_streaming:latest'
             }
         }
     }
 }
+
